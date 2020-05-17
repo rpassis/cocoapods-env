@@ -1,0 +1,1 @@
+require 'cocoapods/env/version'
