@@ -14,17 +14,19 @@ module Pod
 
             def remove_from_argv(argv, key)
                 options = filter_by_key(argv.options, key)
-                options.each { |hash| hash.keys.each { |k| argv.option("#{key}#{k}") } }
+                options.keys.each { |k| argv.option("#{key}#{k}") }
+                options
             end
 
             def filter_by_key(options, key)
-                filtered_options = options.map do |(k, v)|
-                    if v == "true" then v = true
-                    elsif v == "false" then v = false
+                filtered_options = {}
+                options.each do |(k, v)|
+                    if v == 'true' then v = true
+                    elsif v == 'false' then v = false
                     end
-                    { k.gsub(key, '') => v } if k.include?(key)
+                    filtered_options[k.gsub(key, '').to_sym] = v if k.include?(key)
                 end
-                filtered_options.compact
+                filtered_options
             end
 
             def update_podfile(options)

@@ -17,26 +17,26 @@ class CocoapodsEnvTest < Minitest::Test
   def test_it_sets_user_defined_option
     argv = CLAide::ARGV.new(["--option-a", "--user-defined-test123=value"])
     command = Pod::Command::Install.new(argv)
-    assert_includes Pod::Podfile::DSL.user_defined_options, { "test123" => "value" }
+    assert_equal Pod::Podfile::DSL.user_defined_options[:test123], "value"
   end
 
   def test_it_parses_user_defined_true_string_to_boolean
     argv = CLAide::ARGV.new(["--option-a", "--user-defined-test123=true"])
     command = Pod::Command::Install.new(argv)
-    assert_includes Pod::Podfile::DSL.user_defined_options, { "test123" => true }
+    assert_equal Pod::Podfile::DSL.user_defined_options[:test123], true
   end
 
   def test_it_parses_user_defined_false_string_to_boolean
     argv = CLAide::ARGV.new(["--option-a", "--user-defined-test123=false"])
     command = Pod::Command::Install.new(argv)
-    assert_includes Pod::Podfile::DSL.user_defined_options, { "test123" => false }
+    assert_equal Pod::Podfile::DSL.user_defined_options[:test123], false
   end
 
   def test_it_parses_multiple_user_defined_options
     argv = CLAide::ARGV.new(["--user-defined-test123=ABC", "--user-defined-test456=false"])
     command = Pod::Command::Install.new(argv)
-    assert_includes Pod::Podfile::DSL.user_defined_options, { "test123" => "ABC" }
-    assert_includes Pod::Podfile::DSL.user_defined_options, { "test456" => false }
+    assert_equal Pod::Podfile::DSL.user_defined_options[:test123], "ABC"
+    assert_equal Pod::Podfile::DSL.user_defined_options[:test456], false
   end
 
 end
