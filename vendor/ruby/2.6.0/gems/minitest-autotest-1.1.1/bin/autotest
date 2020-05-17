@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby -w
-
-require 'autotest'
-
-Autotest.run
