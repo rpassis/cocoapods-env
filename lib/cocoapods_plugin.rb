@@ -1,1 +1,1 @@
-require 'cocoapods/env/main.rb'
+require 'cocoapods/env'
