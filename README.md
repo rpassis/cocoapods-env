@@ -1,8 +1,6 @@
 # Cocoapods::Env
 
-This [CocoaPods plugin](https://guides.cocoapods.org/plugins/index.html) adds the ability to pass user defined parameters during pod installation, and access them in your Podfile.
-
-Parameters are passed in the format `user-defined-${parameter_name}=${value}`, and can be accessed via the `user_defined_options` hash in the `Podfile`.
+This [CocoaPods plugin](https://guides.cocoapods.org/plugins/index.html) adds the ability to set user defined parameters during pod installation and access them in your Podfile. Parameters are passed in the format `user-defined-${parameter_name}=${value}`, and can be accessed via the `user_defined_options` hash in the `Podfile`.
 
 ## Installation
 
