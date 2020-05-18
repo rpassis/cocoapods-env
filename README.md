@@ -1,39 +1,56 @@
 # Cocoapods::Env
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cocoapods/env`. To experiment with that code, run `bin/console` for an interactive prompt.
+This [CocoaPods plugin](https://guides.cocoapods.org/plugins/index.html) adds the ability to pass user defined parameters during pod installation, and access them in your Podfile.
 
-TODO: Delete this and the text above, and describe your gem
+Parameters are passed in the format `user-defined-${parameter_name}=${value}`, and can be accessed via the `user_defined_options` hash in the `Podfile`.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's `Gemfile`:
 
 ```ruby
-gem 'cocoapods-env'
+gem 'cocoapods-env', git: 'git@github.vimeows.com:MobileApps/cocoapods-env.git', branch: 'master'
 ```
 
 And then execute:
 
-    $ bundle install
+```bash
+bundle install
+```
 
-Or install it yourself as:
+Add the plugin to your `Podfile`
 
-    $ gem install cocoapods-env
+```ruby
+plugin 'cocoapods-env'
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Example usage:
+
+```ruby
+# podfile.rb
+plugin 'cocoapods-env'
+workspace 'Vimeo'
+
+target_platform = user_defined_options[:platform] || "ios"
+deployment_target = user_defined_options[:deployment_target] || 12.4
+platform target_platform, deployment_target
+
+pod 'VimeoAuthentication'
+```
+
+Then you can customize the platform and deployment target via user-defined parameters:
+
+```bash
+bundle exec pod install --user-defined-platform=ios --user-defined-deployment_target=12.4
+```
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cocoapods-env.
-
 
 ## License
 
