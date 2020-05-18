@@ -35,7 +35,7 @@ target_platform = user_defined_options[:platform] || "ios"
 deployment_target = user_defined_options[:deployment_target] || 12.4
 platform target_platform, deployment_target
 
-pod 'VimeoAuthentication'
+pod 'ExamplePod'
 ```
 
 Then you can customize the platform and deployment target via user-defined parameters:
